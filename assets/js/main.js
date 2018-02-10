@@ -1,26 +1,26 @@
 var charArr = [{
-  name: 'char-one',
-  hp: 50,
+  name: 'Vero',
+  hp: 100,
   img: 'assets/img/char-1.png'
 }, {
-  name: 'char-two',
-  hp: 40,
+  name: 'Naka',
+  hp: 100,
   img: 'assets/img/char-2.png'
 }, {
-  name: 'char-three',
-  hp: 70,
+  name: 'Lugdog',
+  hp: 100,
   img: 'assets/img/char-3.png'
 }, {
-  name: 'char-four',
-  hp: 90,
+  name: 'Maduga',
+  hp: 100,
   img: 'assets/img/char-4.png'
 }, {
-  name: 'char-five',
-  hp: 90,
+    name: 'Agloc',
+  hp: 100,
   img: 'assets/img/char-5.png'
 }, {
-  name: 'char-six',
-  hp: 90,
+  name: 'Tomas',
+  hp: 100,
   img: 'assets/img/char-6.png'
 }]
 var chosenHero,
@@ -50,18 +50,18 @@ function initGame() {
     // const character = array[i];
     var charCol = $('<div id="character-' + i + '" class="char animated infinite col-md-' + num + '" value="' + i + '"></div>')
     var $characters = $('.characters')
-    charCol.html('<img src="' + charArr[i].img + '"></h3>' + charArr[i].name + '</h3>')
+    charCol.html('<h3 class="char-name">'+charArr[i].name+'</h3><img src="' + charArr[i].img+'">')
     $characters.append(charCol)
   }
   loadAudio($('#audio-vs-screen'))
   // playAudio($('#audio-vs-screen'))
 }
-$(document).on('mouseenter', '.char', function () {
-  $(this).addClass('pulse')
-})
-$(document).on('mouseleave', '.char', function () {
-  $(this).removeClass('pulse')
-})
+// $(document).on('mouseenter', '.char', function () {
+//   $(this).addClass('pulse')
+// })
+// $(document).on('mouseleave', '.char', function () {
+//   $(this).removeClass('pulse')
+// })
 // Evenet handing for Hero Selection
 $(document).on('click', '.char', function () {
   var characterIndex = $(this).attr('value')
@@ -69,25 +69,63 @@ $(document).on('click', '.char', function () {
   isHeroChosen = true
   if (isEnemyChosen === false) {
     if (isHeroChosen === true) {
-      var chosenHero = charArr[characterIndex]
-      var $heroSelection = $('#character-' + characterIndex).detach()
-      $('.hero').append('<h2>'+chosenHero.name+' <span class="small hp">'+chosenHero.hp+' HP</span><h2>')
-                .append($heroSelection);
-      $gameDirections.text('Select Your Enemy')
       isEnemyChosen = true
+      // get hero clicked
+      var chosenHero = charArr[characterIndex]
+      var $heroSelection = $('#character-' + characterIndex);
+      $heroSelection.addClass('hero-selected')
+      setTimeout(function () {
+        $heroSelection.detach().removeClass('hero-selected')
+        $heroSelection.find('.char-name').remove()
+        $('#fight-bar').append('<div class="hero-side"><h2 class="fightbar-name">' + chosenHero.name + ' <span class="small hp">' + chosenHero.hp + ' HP</span></h2></div>')
+        var $heroAttackBtn = $('<button id="hero-attack" type="button" class="btn btn-outline-light attack-btn">Light</button>')
+        var $heroSide = $('.hero-side');
+        $heroSide.append($heroSelection).append($heroAttackBtn)
+        $gameDirections.html('Select Your <br>Enemy')
+      }, 1000)     
+
+
+   
+
     }
   } else {
-    // Hero has been selected (isEnemyChosen ===)
-    var chosenEmeney = charArr[characterIndex]
-    var $enemeySelection = $('#character-' + characterIndex).detach()
-    $('.enemey').append('<h2>' + chosenEmeney.name + ' <span class="small hp">' + chosenEmeney.hp +' HP</span><h2>')             .append($enemeySelection);
-    $gameDirections.text('')
-    // reset globals
+    // Hero has already been selected so reset everything
     isEnemyChosen = false
     isHeroChosen = false
 
-    $('.characters').addClass('fadeOut')
-    $('#fight-bar').css('visibility', 'visible')
+    // get enemeny clicked
+    var chosenEmeney = charArr[characterIndex]
+    var $enemeySelection = $('#character-' + characterIndex)
+    $enemeySelection.addClass('enemey-selected')
+    setTimeout(function() {
+      $enemeySelection.detach().removeClass('enemey-selected').addClass('flip-enemey')
+      $enemeySelection.find('.char-name').remove()
+      $('#fight-bar').append('<div class="enemey-side animated"><h2>' + chosenEmeney.name + ' <span class="small hp">' + chosenEmeney.hp + ' HP</span></h2></div>')
+      // var $enemeyAttackBtn = '<button type="button" class="btn btn-outline-light">Attack</button>'
+      var $enemeySide = $('.enemey-side');
+      $enemeySide.append($enemeySelection)
+      // .append($enemeyAttackBtn);
+      $('.characters').addClass('fadeOut').css('display', 'none')
+      $('#fight-bar').addClass('fadeIn').css('zIndex', 99)
+      // .css('visibility', 'visible')
+     setTimeout(function() {
+       $gameDirections.text('Fight')
+     },1000)
+    }, 1000)
+
+    var $heroAttackBtn = $('#hero-attack');
+    $heroAttackBtn.on('click', function(event) {
+      event.preventDefault();
+      console.log(chosenEmeney.name+' attacking');
+      $('.enemey-side').addClass('shake')
+      $('#hero-attack').prop('disabled', true);
+      setTimeout(function () {
+        $('.enemey-side').removeClass('shake')
+        $('#hero-attack').prop('disabled', false);
+      },2000)
+    });
+
+    $(document).off('click');  
   }
   // END Char Selection
 })
