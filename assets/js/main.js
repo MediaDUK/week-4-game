@@ -82,11 +82,7 @@ $(document).on('click', '.char', function () {
         var $heroSide = $('.hero-side');
         $heroSide.append($heroSelection).append($heroAttackBtn)
         $gameDirections.html('Select Your <br>Enemy')
-      }, 1000)     
-
-
-   
-
+      }, 1000) 
     }
   } else {
     // Hero has already been selected so reset everything
