@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>RPG Game</title>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="node_modules/animate.css/animate.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+
+  <div class="container">
+    <h2 id="game-direction" class="text-center">Select Your Hero</h2>
+    <div class="row characters animated"></div>
+    <div class="row gameplay"> 
+      <div class="col hero"></div>
+      <div class="col enemey"></div>
+    </div>
+
+<div id="fight-bar" class="row fight-bar text-center">
+      <h1>Fight</h1>
+    </div>
+  </div>
+
+
+<audio id="audio-vs-screen" class="audio" preload="none">
+<source src="assets/audio/weaponlord-vs-screen.mp3" type="audio/mpeg">
+  <!-- <source src="audio/music.ogg" type="audio/ogg"> -->
+</audio>
+  
+<script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+<script src="node_modules/tether/dist/js/tether.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

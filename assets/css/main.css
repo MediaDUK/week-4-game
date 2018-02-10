@@ -1,0 +1,19 @@
+body {
+  background: #1b1b1b url(../img/bg.jpg) center center no-repeat;
+  background-size: cover; 
+  height: 100vh;
+}
+
+.char img {
+  width: 150px;
+  height: 150px;
+}
+
+
+.audio{
+  display: none;
+}
+
+.fight-bar{
+  visibility: hidden;
+}
