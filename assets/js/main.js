@@ -73,12 +73,13 @@ $(document).on('click', '.char', function () {
       // get hero clicked
       var chosenHero = charArr[characterIndex]
       var $heroSelection = $('#character-' + characterIndex);
-      $heroSelection.addClass('hero-selected')
+      // $heroSelection.addClass('hero-selected')
       setTimeout(function () {
-        $heroSelection.detach().removeClass('hero-selected')
+        $heroSelection.detach()
+        // .removeClass('hero-selected')
         $heroSelection.find('.char-name').remove()
         $('#fight-bar').append('<div class="hero-side"><h2 class="fightbar-name">' + chosenHero.name + ' <span class="small hp">' + chosenHero.hp + ' HP</span></h2></div>')
-        var $heroAttackBtn = $('<button id="hero-attack" type="button" class="btn btn-outline-light attack-btn">Light</button>')
+        var $heroAttackBtn = $('<button id="hero-attack" type="button" class="btn btn-outline-light attack-btn">Attack</button>')
         var $heroSide = $('.hero-side');
         $heroSide.append($heroSelection).append($heroAttackBtn)
         $gameDirections.html('Select Your <br>Enemy')
@@ -92,9 +93,10 @@ $(document).on('click', '.char', function () {
     // get enemeny clicked
     var chosenEmeney = charArr[characterIndex]
     var $enemeySelection = $('#character-' + characterIndex)
-    $enemeySelection.addClass('enemey-selected')
+    // $enemeySelection.addClass('enemey-selected')
     setTimeout(function() {
-      $enemeySelection.detach().removeClass('enemey-selected').addClass('flip-enemey')
+      $enemeySelection.detach().addClass('flip-enemey')
+      // .removeClass('enemey-selected')
       $enemeySelection.find('.char-name').remove()
       $('#fight-bar').append('<div class="enemey-side animated"><h2>' + chosenEmeney.name + ' <span class="small hp">' + chosenEmeney.hp + ' HP</span></h2></div>')
       // var $enemeyAttackBtn = '<button type="button" class="btn btn-outline-light">Attack</button>'

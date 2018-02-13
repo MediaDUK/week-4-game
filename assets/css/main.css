@@ -45,13 +45,22 @@ h2#game-direction {
   left: 150px;
 }
 .char {
+  cursor: pointer;
   text-align: center;
 }
 .char img {
   width: 150px;
   height: 150px;
 }
+ .char:hover img {
+   border: 2px solid #ccc;
+ }
 
+ .hero-side:hover .char > img {
+   border: none;
+   cursor: default;
+   
+ }
 
 .audio{
   display: none;
@@ -62,7 +71,7 @@ h2#game-direction {
   z-index: 100;
   display: flex;
   align-items: center;
-justify-content: space-evenly;
+  justify-content: space-evenly;
 }
 /* .fight-bar div {
   center
@@ -70,14 +79,21 @@ justify-content: space-evenly;
 
 
 
-.hero-selected {
+/* .hero-selected {
 border: 2px solid greenyellow;
 }
 .enemey-selected {
   border: 2px solid red;
+} */
+
+.hero-side .char>img {
+  margin-bottom: 1em;
 }
-
-
 button.attack-btn {
   z-index: 100;
+      background: #c51f1f;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: .5px;
 }
