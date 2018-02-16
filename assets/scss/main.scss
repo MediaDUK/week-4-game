@@ -1,0 +1,101 @@
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../node_modules/animate.css/animate.css';
+body {
+  background: #1b1b1b url(../img/bg.jpg) center center no-repeat;
+  background-size: cover; 
+  height: 100vh;
+  color: #fdfdfd;
+
+}
+.container.container-fullscreen {
+    position: relative;
+    height: 100vh;
+}
+span.small.hp {
+  font-size: 15px;
+  padding-left: 3px;
+}
+.char-name{
+  color: #fdfdfd;
+}
+h2#game-direction {
+  font-size: 60px;
+  color: #fdfdfd;
+  padding: 70px 0 0 0;
+  width: 400px;
+  margin: 0 auto;}
+
+.row.characters {
+    position: absolute;
+    bottom: 10%;
+    /* left: 50%; */
+    /* -webkit-transform: translateX(50%);
+    transform: translateX(50%) */
+    z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+}
+
+.fightbar-name {
+  color: #fdfdfd;
+}
+
+.flip-enemey {
+  transform: scaleX(-1);
+  position: relative;
+  left: 150px;
+}
+.char {
+  cursor: pointer;
+  text-align: center;
+}
+.char img {
+  width: 150px;
+  height: 150px;
+}
+ .char:hover img {
+   border: 2px solid #ccc;
+ }
+
+ .hero-side:hover .char > img {
+   border: none;
+   cursor: default;
+   
+ }
+
+.audio{
+  display: none;
+}
+
+.fight-bar{
+  opacity: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/* .fight-bar div {
+  center
+} */
+
+
+
+/* .hero-selected {
+border: 2px solid greenyellow;
+}
+.enemey-selected {
+  border: 2px solid red;
+} */
+
+.hero-side .char>img {
+  margin-bottom: 1em;
+}
+button.attack-btn {
+  z-index: 100;
+      background: #c51f1f;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: .5px;
+}
