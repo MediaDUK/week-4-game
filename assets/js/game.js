@@ -111,7 +111,7 @@ $(document).on('click', '.char', function () {
         $heroSelection.detach().removeClass('hero-selected')
         $heroSelection.find('.char-name').remove()
         $('#fight-bar').append('<div class="hero-side"><h2 class="fightbar-name">' + chosenHero.name + ' <span class="small hp">' + chosenHero.hp + ' HP</span></h2></div>')
-        var $heroAttackBtn = $('<button id="hero-attack" type="button" class="btn btn-outline-light attack-btn">Light</button>')
+        var $heroAttackBtn = $('<button id="hero-attack" type="button" class="btn btn-outline-light attack-btn">Attack</button>')
         var $heroSide = $('.hero-side');
         $heroSide.append($heroSelection).append($heroAttackBtn)
         $gameDirections.html('Select Your <br>Enemy')
