@@ -114,24 +114,30 @@ $(document).on('click', '.char', function () {
       $('#fight-bar').addClass('fadeIn').css('zIndex', 99)
       // .css('visibility', 'visible')
       setTimeout(function () {
-        $gameDirections.text('Fight')
+        $gameDirections.html('</br>Fight')
       }, 1000)
     }, 1000)
 
     var $heroAttackBtn = $('#hero-attack');
     $heroAttackBtn.on('click', function (event) {
       event.preventDefault();
-      console.log(chosenHero.name + ' attacking');
+      console.log('------------------'+chosenHero.name+' is attacking----------------------------')
       $('.enemey-side').addClass('shake')
       $('#hero-attack').prop('disabled', true);
-      var hitPoints = $('#hp').text();
-      if (hitPoints <= 0) {
-        alert(chosenEmeney.name+ 'has died');
-        $enemeySelection.detach()
-      }
-      console.log(hitPoints)
       chosenEmeney.takeDamage(chosenHero.attack)
-      $('#hp').text(chosenEmeney.hp)
+     $('#hp').text(chosenEmeney.hp);
+      var hitPoints = $('#hp').text();
+      if (parseInt(hitPoints) < 0) {
+        alert(chosenEmeney.name+ 'has died');
+        $enemeySelection.detach().addClass('make-small')
+
+        $('#dead-opponents').removeClass('hide-bar').append($enemeySelection)
+      }
+      console.log('typeof hitPoints === ', typeof hitPoints)
+      console.log('parseInt(hitPoints) === ', parseInt(hitPoints))
+      console.log('typeof parseInt(hitPoints) === ', typeof parseInt(hitPoints))
+      
+      
       setTimeout(function () {
         $('.enemey-side').removeClass('shake')
         $('#hero-attack').prop('disabled', false);
