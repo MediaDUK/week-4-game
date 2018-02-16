@@ -1,59 +1,34 @@
-var charArr = [{
-  name: 'Vero',
-  hp: 100,
-  img: 'assets/img/char-1.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-  }
-}, {
-  name: 'Naka',
-  hp: 100,
-  img: 'assets/img/char-2.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-    counter += 1;
-  }
-}, {
-  name: 'Lugdog',
-  hp: 100,
-  img: 'assets/img/char-3.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-  }
-}, {
-  name: 'Maduga',
-  hp: 100,
-  img: 'assets/img/char-4.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-  }
-}, {
-  name: 'Agloc',
-  hp: 100,
-  img: 'assets/img/char-5.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-  }
-}, {
-  name: 'Tomas',
-  hp: 100,
-  img: 'assets/img/char-6.png',
-  attack: 6,
-  counterAttack: 10,
-  takeDamage: function (damage) {
-    this.hp -= damage
-  }
-}]
+// Only modify your own prototypes.
+// Never modify the prototypes of standard JavaScript objects.
+function character(name, hp, img, attack) {
+  this.name = name;
+  this.hp = hp;
+  this.img = img;
+  this.attack = attack;
+  this.counter = 1;
+  this.counterAttack = function() {
+    return 5
+  };
+  this.takeDamage = function(damage) {
+    this.hp -= 10*this.counter
+    this.counter+=1
+  };
+}
+
+function makeCharacter(name, hp, img, attack) {
+  return new character(name, hp, img, attack)
+}
+
+// new character('Vero', 100, 'assets/img/char-1.png', 10);
+
+var charArr = [
+  makeCharacter('Vero', 100, 'assets/img/char-1.png', 10),
+  makeCharacter('Naka', 80, 'assets/img/char-2.png', 30),
+  makeCharacter('Lugdog', 70, 'assets/img/char-3.png', 30),
+  makeCharacter('Maduga', 80, 'assets/img/char-4.png', 30),
+  makeCharacter('Agloc', 80, 'assets/img/char-5.png', 30),
+  makeCharacter('Tomas', 80, 'assets/img/char-6.png', 30)
+]
 var chosenHero,
   isHeroChosen,
   isHeroAlive,
@@ -104,7 +79,8 @@ $(document).on('click', '.char', function () {
     if (isHeroChosen === true) {
       isEnemyChosen = true
       // get hero clicked
-      var chosenHero = charArr[characterIndex]
+      chosenHero = charArr[characterIndex]
+      console.log(chosenHero)
       var $heroSelection = $('#character-' + characterIndex);
       // $heroSelection.addClass('hero-selected')
       setTimeout(function () {
@@ -129,7 +105,7 @@ $(document).on('click', '.char', function () {
     setTimeout(function () {
       $enemeySelection.detach().removeClass('enemey-selected').addClass('flip-enemey')
       $enemeySelection.find('.char-name').remove()
-      $('#fight-bar').append('<div class="enemey-side animated"><h2>' + chosenEmeney.name + ' <span id="hp" class="small hp">' + chosenEmeney.hp + ' HP</span></h2></div>')
+      $('#fight-bar').append('<div class="enemey-side animated"><h2>' + chosenEmeney.name + ' <span id="hp" class="small hp">' + chosenEmeney.hp + '</span> <span class="small hp">HP</span></h2></div>')
       // var $enemeyAttackBtn = '<button type="button" class="btn btn-outline-light">Attack</button>'
       var $enemeySide = $('.enemey-side');
       $enemeySide.append($enemeySelection)
@@ -145,12 +121,17 @@ $(document).on('click', '.char', function () {
     var $heroAttackBtn = $('#hero-attack');
     $heroAttackBtn.on('click', function (event) {
       event.preventDefault();
-      console.log(chosenEmeney.name + ' attacking');
+      console.log(chosenHero.name + ' attacking');
       $('.enemey-side').addClass('shake')
       $('#hero-attack').prop('disabled', true);
-      chosenEmeney.takeDamage(10)
-      $('#hp').text(chosenEmeney.hp +' hp')
-
+      var hitPoints = $('#hp').text();
+      if (hitPoints <= 0) {
+        alert(chosenEmeney.name+ 'has died');
+        $enemeySelection.detach()
+      }
+      console.log(hitPoints)
+      chosenEmeney.takeDamage(chosenHero.attack)
+      $('#hp').text(chosenEmeney.hp)
       setTimeout(function () {
         $('.enemey-side').removeClass('shake')
         $('#hero-attack').prop('disabled', false);
